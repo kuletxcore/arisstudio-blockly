@@ -3,12 +3,12 @@ import { javascriptGenerator } from 'blockly/javascript';
 import myCharer from 'renderer/models/charcmd';
 import { wrapStr } from 'renderer/utils/DataTool';
 
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 let blockname="b_char_shakexy"
-// 带有映射的学生名
+// Student name with mapping
 const jsondesc = {
     "type": `${blockname}`,
-    "message0": "人物昵称 %1 随机方向 抖动%2秒，幅度 %3 频率 %4",
+    "message0": "Character nickname %1 random direction shake for %2 seconds, strength %3 frequency %4",
     "args0": [
       {
         "type": "input_value",
@@ -48,14 +48,14 @@ const jsondesc = {
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks[blockname] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator[blockname] = function (block) {
     const nickname = javascriptGenerator.valueToCode(block, 'val1', javascriptGenerator.ORDER_ATOMIC);
     

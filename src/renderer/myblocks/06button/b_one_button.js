@@ -3,19 +3,19 @@ import { javascriptGenerator } from 'blockly/javascript';
 import { generateTime } from 'renderer/utils/timestamp';
 
 
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 let blockname="b_one_button"
-// 带有映射的学生名
+// Student name with mapping
 const jsondesc = {
     "type": `${blockname}`,
-    "message0": "%1 单个按钮，内容：[ %2 ] 执行 %3",
+    "message0": "%1 single button, content:[ %2 ] Run %3",
     "args0": [
       {
         "type": "field_dropdown",
         "name": "drop1",
         "options": [
-            ["出现按钮","0"],
-            ["自动选择按钮1","1"],
+            ["show button","0"],
+            ["auto-select button1","1"],
         ]
       },
       {
@@ -36,18 +36,18 @@ const jsondesc = {
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks[blockname] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator[blockname] = function (block) {
     const value_val1 = javascriptGenerator.valueToCode(block, 'val1', javascriptGenerator.ORDER_ATOMIC);
     if(value_val1.length==0){
-      // 如果该字符串参数空内没有任何变量，忽略掉本代码块
+      // If this string input contains no Variabless, ignore this code block
       return ``;
     }
     const statements_sta1=javascriptGenerator.statementToCode(block,'sta1');

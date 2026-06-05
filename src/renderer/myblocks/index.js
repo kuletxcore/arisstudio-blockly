@@ -1,4 +1,4 @@
-// import使其被运行
+// Import so it runs
 import "./01load"
 import "./02pic"
 import "./03char"

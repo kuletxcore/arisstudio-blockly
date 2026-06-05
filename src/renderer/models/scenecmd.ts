@@ -9,7 +9,7 @@ class Myscene{
     }
 
     /**
-     * 未完继续
+     * Continue marker
      */
 
     continue=()=>{
@@ -17,13 +17,13 @@ class Myscene{
     }
 
     /**
-     * 结束
+     * End
      */
     end=(text:string)=>{
         return `sc end ${text}`
     }
     /**
-     * 启用/禁用场景音效
+     * Enable/disable scene sound
      */
 }
 

@@ -1,28 +1,28 @@
 class Mytext{
     /**
-     * 隐藏文本
+     * Hide Text
      */
     hidetext=()=>{
         return `text hide`
     }
 
     /**
-     * 设置打字机效果时间间隔
+     * Set typewriter effect interval
      */
     textinterval=(time:number)=>{
         return `text interval ${time}`
     }
 
     /**
-     * 隐藏所有文本框
+     * Hide all text boxes
      */
     hidealltext=()=>{
         return `text hide`
     }
 
     /**
-     * 设置文本内容
-     * @param iscontinue 是否连续，true时不带断点，false时带断点
+     * set text content
+     * @param iscontinue whether continuous; true means no breakpoint, false means with breakpoint
      */
     text=(name:string,group:string,text:string,iscontinue:boolean)=>{
         if(iscontinue){
@@ -34,8 +34,8 @@ class Mytext{
     }
 
     /**
-     * 设置文本内容并高亮指定人物
-     * @param iscontinue 是否连续，true时不带断点，false时带断点
+     * set text content and highlight the specified character
+     * @param iscontinue whether continuous; true means no breakpoint, false means with breakpoint
      */
     texthighlight=(nameId:string,name:string,group:string,text:string,iscontinue:boolean)=>{
         if(iscontinue){
@@ -47,9 +47,9 @@ class Mytext{
     }
 
     /**
-     * 文本框 设置文本内容
-     * @param position middle:画面中间 bottom:底部
-     * @param iscontinue 是否连续，true时不带断点，false时带断点
+     * text box set text content
+     * @param position middle:screen center bottom:bottom
+     * @param iscontinue whether continuous; true means no breakpoint, false means with breakpoint
      * 
      */
      sidetext=(text:string,position:string,iscontinue:boolean)=>{
@@ -70,28 +70,28 @@ class Mytext{
     }
 
     /**
-     * 小标题
+     * subtitle
      */
     label=(text:string)=>{
         return `label '${text}'`
     }
 
     /**
-     * 一行横幅
+     * one-line banner
      */
     banner=(textmain:string)=>{
         return `banner '${textmain}'`
     }
 
     /**
-     * 两行横幅
+     * two-line banner
      */
     banner2=(textmain:string,textside:string)=>{
         return `banner '${textside}' '${textmain}'`
     }
 
     /**
-     * 三行横幅
+     * three-line banner
      */
     banner3=(textmain:string,textside:string,textside2:string)=>{
         return `banner '${textside}' '${textside2}' '${textmain}'`

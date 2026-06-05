@@ -3,7 +3,7 @@ import PlayGround, { Block, Value, Field, Shadow, Category } from '../../compone
 
 export default function Menu06() {
   return (
-    <Category name="按钮">
+    <Category name="Button">
         <Block type="b_one_button">
           <Value name="val1">
             <Shadow type="text" />

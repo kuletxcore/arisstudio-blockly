@@ -2,13 +2,13 @@ import * as Blockly from 'blockly/core';
 import { javascriptGenerator } from 'blockly/javascript';
 
 /**
- * 定义了一个阶段，阶段数字越小，阶段越早进行
+ * Defines a stage; smaller stage numbers run earlier
  */
 
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 const jsondesc = {
     "type": "b_stage",
-    "message0": "主线块(唯一) %1 %2",
+    "message0": "Mainline Block (unique) %1 %2",
     "args0": [
       {
         "type": "field_number",
@@ -27,23 +27,23 @@ const jsondesc = {
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks['b_stage'] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator['b_stage'] = function (block) {
-    // 阶段数字
+    // stagenumber
     const number_val1 = block.getFieldValue('num1');
-    // 阶段右侧代码忽略
+    // Ignore code to the right of the stage
     // var value_valeinput = javascriptGenerator.valueToCode(block, 'stageinput', javascriptGenerator.ORDER_ATOMIC);
-    // 内部包裹的代码
+    // Wrapped inner code
     const statements_steps = javascriptGenerator.statementToCode(block, 'sta1');
     return `
-// 阶段${number_val1}代码
+// stage${number_val1}code
 stagelist=[];
 ${statements_steps.trim()}
 if(resmap.has(${number_val1})){
@@ -51,6 +51,6 @@ if(resmap.has(${number_val1})){
 }else{
     resmap.set(${number_val1},stagelist.join("\\n")+"\\n");
 }
-// 阶段${number_val1}代码结束
+// stage${number_val1}code end
 `
 }

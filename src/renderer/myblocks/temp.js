@@ -1,12 +1,12 @@
 import * as Blockly from 'blockly/core';
 import { javascriptGenerator } from 'blockly/javascript';
 import { wrapStr } from 'renderer/utils/DataTool';
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 let blockname="b_temp"
-// 带有映射的学生名
+// Student name with mapping
 const jsondesc = {
     "type": `${blockname}`,
-    "message0": "文字 变量 %1 下拉框 %2 数字 %3",
+    "message0": "Text Variables %1 dropdown %2 number %3",
     "args0": [
       {
         "type": "input_value",
@@ -38,20 +38,20 @@ const jsondesc = {
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks[blockname] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator[blockname] = function (block) {
     const value_val1 = javascriptGenerator.valueToCode(block, 'val1', javascriptGenerator.ORDER_ATOMIC);
     const dropdown_drop1 = block.getFieldValue('drop1');
     const number_num1 = block.getFieldValue('num1');
 
 
-    return `stagelist.push(\`变量\${${value_val1}} 下拉${dropdown_drop1} 数字${number_num1}\`);`
+    return `stagelist.push(\`Variables\${${value_val1}} dropdown${dropdown_drop1} number${number_num1}\`);`
 }
 

@@ -1,102 +1,96 @@
-# 命令对应文件
+# Command File Map
 
-在积木定义块那边做非法判断
-默认值也在积木定义块里设
-每个积木块的文件夹内的index取消注释即为更新完毕，不要动文件名
+Invalid-input checks and default values are defined in each block definition. Uncomment the corresponding block folder `index` export when a block is complete. Do not rename block files.
 
-## 加载(loadcmd.js)
+## Load commands (`loadcmd.js`)
 
-加载spr角色
-加载自定义角色
-(等)加载 png 角色
-加载 前景/中景/背景 图片
-加载 音效/背景音乐
+- Load spr characters
+- Load custom characters
+- Load png characters
+- Load foreground, midground, and background images
+- Load sound effects and background music
 
-## 图片(imgcmd.js)
+## Image commands (`imgcmd.js`)
 
-带有渐变高亮的 显示/隐藏
-直接 出现/消失
-透明度变化
-单独设置 x/y/z 坐标
-设置 x/y 坐标
-x/y 轴单独移动
-在 x 和 y 轴移动
-x/y 轴抖动
-随机方向抖动
-在 x 和 y 轴同时缩放
+- Show or hide with fade/highlight transitions
+- Appear or disappear immediately
+- Change opacity
+- Set individual x/y/z coordinates
+- Set x/y coordinates
+- Move on a single x/y axis
+- Move on the x/y plane
+- Shake on the x/y axes
+- Shake in random directions
+- Scale on the x and y axes together
 
-## 角色(charcmd.js)
+## Character commands (`charcmd.js`)
 
-带有渐变高亮的 显示/隐藏
-直接 出现/消失
-高亮
-透明度变化
-状态
-皮肤
-表情
-设置角色动画 （暂不可用）
-单独设置 x/y/z 坐标
-设置 x/y 坐标
-x/y 轴单独移动
-在 x 和 y 轴移动
-x/y 轴抖动
-随机方向抖动
-在 x 和 y 轴同时缩放
-常用缩放 靠近/返回
+- Show or hide with fade/highlight transitions
+- Appear or disappear immediately
+- Highlight
+- Change opacity
+- Status
+- Skin
+- Expression
+- Set character animation (currently unavailable)
+- Set individual x/y/z coordinates
+- Set x/y coordinates
+- Move on a single x/y axis
+- Move on the x/y plane
+- Shake on the x/y axes
+- Shake in random directions
+- Scale on the x and y axes together
+- Common scale actions: close up and return
 
-## 声音(soundcmd.js)
+## Sound commands (`soundcmd.js`)
 
-播放
-暂停
-结束
-音量
-音量渐变
-循环
-播放一次
+- Play
+- Pause
+- Stop
+- Volume
+- Volume fade
+- Loop
+- Play once
 
-## 场景命令(scenecmd.js)
+## Scene commands (`scenecmd.js`)
 
-注视线效果
-烟雾效果
-雨效果
-雪效果
-沙尘效果
-未完继续（暂不可用）
-结束（暂不可用）
-启用/禁用场景音效（暂不可用）
+- Focus-line effect
+- Smoke effect
+- Rain effect
+- Snow effect
+- Dust effect
+- Continue marker (currently unavailable)
+- End marker (currently unavailable)
+- Enable or disable scene sound effects (currently unavailable)
 
-## 选择命令(selectcmd.js)
+## Select commands (`selectcmd.js`)
 
-一个选择框
-两个选择框
-三个选择框
+- One-option selection
+- Two-option selection
+- Three-option selection
 
-## 特殊命令(specialcmd.js)
+## Special commands (`specialcmd.js`)
 
-注释
-断点
-等待
-标记
-显示所有标记
-跳转
-设置自动播放速度
-切换脚本
+- Breakpoint
+- Wait
+- Jump
+- Target marker
+- Show all targets
+- Toggle script
+- Set autoplay speed
+- Hide all text boxes
 
-## 文本命令(textcmd.js)
+## Text commands (`textcmd.js`)
 
-隐藏文本
-设置打字机效果时间间隔
-隐藏所有文本框
-默认文本框
-    设置文本内容
-    设置文本内容并不带断点
-    设置文本内容并高亮指定人物
-    设置文本内容并高亮指定人物，不带断点
-中部文本框
-    设置文本内容
-    设置文本内容并不带断点
-底部文本框
-    设置文本内容
-    设置文本内容并不带断点
-小标题
-横幅
+- Bottom text box
+  - Set text content
+  - Set text content without a breakpoint
+  - Set text content and highlight a character
+  - Set text content and highlight a character without a breakpoint
+- Middle text box
+  - Set text content
+  - Set text content without a breakpoint
+- Subtitle text box
+  - Set text content
+  - Set text content without a breakpoint
+- Banner

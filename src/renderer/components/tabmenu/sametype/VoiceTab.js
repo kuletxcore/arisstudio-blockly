@@ -56,10 +56,10 @@ export default function VoiceTab(props) {
   }
 
   return (
-    // 在props.style后追加会覆盖掉props.style
+    // Appending after props.style overrides props.style
     <div style={props.style}>
       <Pagination simple current={page} onChange={(page)=>{setPage(page)}} pageSize={pagesize} total={Math.max(props.inputlist.length,1)} style={{textAlign:'center'}}/>
-      <Button onClick={musicplay}>播放</Button><Button onClick={musicpause}>暂停</Button><Button onClick={musicback}>后退10s</Button><Button onClick={musicfront}>快进10s</Button>
+      <Button onClick={musicplay}>Play</Button><Button onClick={musicpause}>Pause</Button><Button onClick={musicback}>Back 10s</Button><Button onClick={musicfront}>Forward 10s</Button>
 
       <div>
         <div style={{textAlign:'center'}}>
@@ -71,7 +71,7 @@ export default function VoiceTab(props) {
               onClick={()=>{
                   copy(eachfile.name)
                   message.destroy()
-                  message.success("复制成功")
+                  message.success("Copied")
                 }}>{eachfile.name}</Text>
               </div>
               <CustomerServiceOutlined style={{cursor:'pointer',fontSize:'30px'}}  onClick={()=>{playmusic(eachfile)}}/>

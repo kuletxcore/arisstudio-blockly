@@ -14,22 +14,22 @@ export default function ImageTab(props) {
 
     const pagesize=Math.min(45,props.inputlist.length)
     const [page,setPage]=useState(1)
-    // 图片data url
+    // Imagedata url
     let [srclist,setSrclist]=useState(new Array(pagesize))
-    // 图片名字
+    // Image name
     let [namelist,setNamelist]=useState(new Array(pagesize))
     const imgshape=props.imgshape
   
     useEffect(()=>{
-      // 先用error代替
+      // Use error placeholders first
       const errorarray=new Array(pagesize)
       errorarray.fill("")
       setSrclist(errorarray)
       const errornamearray=new Array(pagesize)
-      errornamearray.fill("加载中")
+      errornamearray.fill("Loading")
       setNamelist(errornamearray)
   
-      // 异步逐个加载
+      // Load asynchronously one by one
       props.inputlist.slice((page-1)*pagesize,page*pagesize).forEach((file,ind)=>{
         getBase64(file).then((srcurl)=>{
           const copysrclist=srclist
@@ -43,7 +43,7 @@ export default function ImageTab(props) {
     },[page,pagesize,props.inputlist])
   
     return (
-      // 在props.style后追加会覆盖掉props.style
+      // Appending after props.style overrides props.style
       <div style={props.style}>
         <Pagination simple current={page} onChange={(page)=>{setPage(page)}} pageSize={pagesize} total={Math.max(props.inputlist.length,1)} style={{textAlign:'center'}}/>
         <Button style={{visibility:'hidden'}}></Button>
@@ -57,7 +57,7 @@ export default function ImageTab(props) {
                 <Text keyboard onClick={()=>{
                   copy(namelist[ind])
                   message.destroy()
-                  message.success("复制成功")
+                  message.success("Copied")
                 }}>{namelist[ind]}</Text>
                 </span>
             })}

@@ -23,8 +23,8 @@ export default function Toolbox() {
             <Menu06 />
             <Menu07 />
             <Menu08 />
-            <Category name="变量" custom="VARIABLE"></Category>
-            <Category name="函数" custom="PROCEDURE"></Category>
+            <Category name="Variables" custom="VARIABLE"></Category>
+            <Category name="Functions" custom="PROCEDURE"></Category>
             <Menu100 />
         </>
     )

@@ -4,7 +4,7 @@ import './App.css';
 import PlayGround from './components/PlayGround';
 import Toolbox from './myblocks/Toolbox';
 import { GlobalContext } from './config/globalContext';
-// 引入的同时让所有自定义模块注入
+// Import to inject all custom modules
 import './myblocks'
 import './utils/dialog'
 import { ConfigProvider, theme } from 'antd';

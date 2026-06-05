@@ -3,7 +3,7 @@ import PlayGround, { Block, Value, Field, Shadow, Category } from '../../compone
 
 export default function Menu08() {
   return (
-    <Category name="文字">
+    <Category name="Text">
       <Block type="b_text_autotime">
       </Block>
       <Block type="b_text_hide">

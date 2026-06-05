@@ -3,12 +3,12 @@ import { javascriptGenerator } from 'blockly/javascript';
 import myCharer from 'renderer/models/charcmd';
 import { wrapStr } from 'renderer/utils/DataTool';
 
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 let blockname="b_char_status"
-// 带有映射的学生名
+// Student name with mapping
 const jsondesc = {
     "type": `${blockname}`,
-    "message0": "人物昵称 %1 emo表情 %2 脸部状态 %3 皮肤 %4",
+    "message0": "Character nickname %1 emotion expression %2 face state %3 skin %4",
     "args0": [
       {
         "type": "input_value",
@@ -19,25 +19,25 @@ const jsondesc = {
         "type": "field_dropdown",
         "name": "drop1",
         "options": [
-            ["无","None"],
-            ["注意","Action"],
-            ["生气","Aggro"],
-            ["胡想","Anxiety"],
-            ["谈话","Chat"],
+            ["None","None"],
+            ["Action","Action"],
+            ["Angry","Aggro"],
+            ["Anxious","Anxiety"],
+            ["Chat","Chat"],
             ["!","E"],
             ["?!","EQ"],
             ["?","Q"],
-            ["爱心","Heart"],
+            ["Heart","Heart"],
             ["...","Idea"],
-            ["哼歌","Note"],
-            ["害羞","Shy"],
-            ["流汗","Sweat"],
-            ["闪亮","Twinkle"],
-            ["灯泡","Bulb"],
-            ["伤心","Sad"],
-            ["叹气","Sigh"],
-            ["流泪","Tear"],
-            ["吹气","Steam"],
+            ["Humming","Note"],
+            ["Shy","Shy"],
+            ["Sweat","Sweat"],
+            ["Sparkle","Twinkle"],
+            ["Light bulb","Bulb"],
+            ["Sad","Sad"],
+            ["Sigh","Sigh"],
+            ["Tear","Tear"],
+            ["Steam","Steam"],
         ]
       },
       {
@@ -59,14 +59,14 @@ const jsondesc = {
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks[blockname] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator[blockname] = function (block) {
     const nickname = javascriptGenerator.valueToCode(block, 'val1', javascriptGenerator.ORDER_ATOMIC);
     const emo = block.getFieldValue('drop1');

@@ -1,6 +1,6 @@
 class myChar{
     /**
-     * 带有渐变高亮的 显示show/隐藏hide
+     * Show/hide with fade highlight
      */
     show=(nameId:string,type:string)=>{
         return `${nameId} ${type}`
@@ -8,64 +8,64 @@ class myChar{
 
 
     /**
-     * 直接出现appear/消失disappear
+     * appear immediatelyappear/disappear
      */
     appear=(nameId:string,type:string)=>{
         return `${nameId} ${type}`
     }
 
     /**
-     * @param action show渐入/hide渐出/appear直接出现/disappear直接消失
+     * @param action showFade In/hideFade Out/appearappear immediately/disappeardisappear immediately
      */
     display=(nameId:string, action:string)=>{
         return `${nameId} ${action}`
     }
 
     /**
-     * 高亮
+     * Highlight
      */
     highlight=(nameId:string,hl,time=0)=>{
         return `${nameId} hl ${hl} ${time}`
     }
 
     /**
-     * 透明度变化
+     * opacitychange
      */
 
     /**
-     * 状态
+     * Status
      */
     state=(nameId:string,state:string)=>{
         return `${nameId} state ${state}`
     }
 
     /**
-     * 皮肤
+     * skin
      */
     skin=(nameId:string,skin:string)=>{
         return `${nameId} skin ${skin}`
     }
 
     /**
-     * 表情
+     * expression
      */
     emo=(nameId:string,emo:string)=>{
         return `${nameId} emo ${emo}`
     }
 
     /**
-     * 设置角色动画
+     * Set character animation
      */
 
     /**
-     * x，y位置
+     * x/y position
      */
     posxy=(nameId:string,x:number,y:number)=>{
         return `${nameId} pos ${x} ${y}`
     }
 
     /**
-     * 单独设x，y，z位置
+     * Set individual x/y/z positions
      * @param pos "x"/"y"/"z"
      */
     pos=(nameId:string,pos:string,value:number)=>{
@@ -73,14 +73,14 @@ class myChar{
     }
 
     /**
-     * 在 x 和 y 轴移动
+     * Move on x and y axes
      */
     movexy=(nameId:string,x:number,y:number,time:number)=>{
         return `${nameId} pm ${x} ${y} ${time}`
     }
 
     /**
-     * x/y 轴移动
+     * Move on x/y axes
      * @param pos "xm"/"ym"
      */
     move=(nameId:string,pos:string,value:number,time:number)=>{
@@ -88,7 +88,7 @@ class myChar{
     }
 
     /**
-     * 固定轴抖动
+     * Fixed-axis shake
      * @param type "xs"/"ys"
      */
     shake=(nameId:string,type:string,strength:number,time:number=0.5,vibrato:number=6)=>{
@@ -96,21 +96,21 @@ class myChar{
     }
 
     /**
-     * 随机抖动
+     * Random shake
      */
     shakerandom=(nameId:string,strength:number,time:number=0.5,vibrato:number=6)=>{
         return `${nameId} shake ${strength} ${time} ${vibrato}`
     }
 
     /**
-     * 缩放
+     * Scale
      */
     scale=(nameId:string,scale:number,time:number=0)=>{
         return `${nameId} scale ${scale} ${time}`
     }
 
     /**
-     * 靠近/返回
+     * close up/return
      * @param type "close"/"back"
      */
     movein=(nameId:string,type:string)=>{

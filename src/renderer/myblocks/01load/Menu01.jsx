@@ -4,8 +4,8 @@ import React from 'react'
 
 export default function Menu01() {
   return (
-    <Category name="加载" colour="230">
-        <label text="确保资源摆放位置正确！" web-class="myLabelStyle"></label>
+    <Category name="Load" colour="230">
+        <label text="Make sure assets are placed correctly!" web-class="myLabelStyle"></label>
 
         <Block type="b_load_student">
             <Value name="val1"><Shadow type="text" /></Value>
