@@ -44,7 +44,7 @@ function BlocklyArea() {
 
 export default function App() {
 
-  const [language,setLanguage]=useState("cn")
+  const [language,setLanguage]=useState("en")
   const [darktheme,setDarktheme]=useLocalStorage("darktheme",false)
   
   const [mytheme,setMytheme]=useLocalStorage("mytheme",{
