@@ -13,7 +13,7 @@ const {Search}=Input
 
 
 const turnToRes=(datamap,judge)=>{
-    // 将datamap里的一对多转为一对一,对每个datamap元素判断judge
+    // Implementation note.
     const reslist=[]
         for(let sd of sounds_datamap){
             if(judge(sd)){
@@ -47,23 +47,23 @@ export default function SETab(props) {
     
     const columns=[
         {
-            title:"文件名",
+            title:"Filename",
             dataIndex:"filename",
             width:"40%",
             render:(_,{filename})=>{
                 return <div onClick={()=>{
                     message.destroy()
-                    message.success("复制成功")
+                    message.success("Copied")
                     copy(filename)
                 }}>{filename}</div>
             }
         },
         {
-            title:"描述",
+            title:"Description",
             dataIndex:"desc"
         },
         {
-            title:"操作",
+            title:"Actions",
             width:"20%",
             render:(_,record)=>{
                 return (
@@ -75,10 +75,10 @@ export default function SETab(props) {
                         playmusic(thatfile)
                     }else{
                         message.destroy()
-                        message.error("未找到相关文件")
+                        message.error("No matching file found")
                     }
                 }}
-                >播放</Tag>
+                >Play</Tag>
                 </>
                 )
             }
@@ -92,8 +92,8 @@ export default function SETab(props) {
     return (
         <div style={props.style}>
         <div style={{textAlign:'center'}}>
-            <Search placeholder="搜索音效描述" allowClear onSearch={onSearch} style={{ width: 300,marginRight:"10px" }} />
-            <Tooltip title={<div>欢迎各位使用【Aris Studio】全音效一览表，此文本已整理当前版本的【Aris Studio】的全部音效【共2092条】来方便各位在使用【Aris Studio】时更快速地寻找所需要音效，由于所有注释均为本人聆听所标注的，有些差异，如果有更好的注释请告知整理者。此外该表还有一些其他不足之处，也欢迎使用者提出改进建议。 整合人：<a href='https://b23.tv/wfXw8Wq' target="_blank">传猫猫</a></div>}>
+            <Search placeholder="Search sound descriptions" allowClear onSearch={onSearch} style={{ width: 300,marginRight:"10px" }} />
+            <Tooltip title={<div>Welcome to the Aris Studio sound list. It organizes all sounds from the current Aris Studio version so users can find needed sounds faster. Comments are based on manual listening and may differ; suggestions are welcome. Curator：<a href='https://b23.tv/wfXw8Wq' target="_blank">Chuan Maomao</a></div>}>
                 <QuestionCircleOutlined style={{fontSize:20,opacity:0.5,verticalAlign:'middle'}}/>
             </Tooltip>
         </div>

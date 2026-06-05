@@ -256,7 +256,7 @@ export default class MenuBuilder {
         label: 'Help',
         submenu: [
           {
-            label: 'Github链接',
+            label: 'GitHub Link',
             click() {
               shell.openExternal('https://github.com/sanmusen214/arisstudio-blockly');
             },

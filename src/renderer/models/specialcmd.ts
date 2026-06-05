@@ -1,53 +1,53 @@
 class Myspecial{
     /**
-     * 注释
+     * Comment
      */
     spec=(text:string)=>{
         return `//${text}`
     }
     /**
-     * 断点
+     * Breakpoint
      */
     breakpoint=()=>{
         return `==`
     }
     /**
-     * 等待
+     * Wait
      */
     wait=(time:number)=>{
         return `wait ${time}`
     }
 
     /**
-     * 标记
+     * Target
      */
     target=(name:string)=>{
         return `target ${name}`
     }
 
     /**
-     * 显示所有标记
+     * Show All Targets
      */
     showtarget=()=>{
         `targets`
     }
 
     /**
-     * 跳转
+     * Jump
      */
     jump=(name:string)=>{
         return `jump ${name}`
     }
 
     /**
-     * 设置自动播放速度
+     * Set Autoplay Speed
      */
     autoplay=(speed:number)=>{
         return `auto ${speed}`
     }
 
     /**
-     * 切换脚本
+     * Switch Script
      */
     switch=(filename:string)=>{
         return `switch ${filename}`

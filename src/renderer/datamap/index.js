@@ -5,18 +5,18 @@ import soundsjson from "./rawjson/sound.json"
 
 
 
-// 封装人物名字和素材对应表
+// Build a map from character names to assets
 export const students_datamap=[]
 for(let stu of studentsjson.students){
     if(stu.sprName.startsWith("CH")||stu.sprName.startsWith("NP")){
-        // 中文名，素材名
-        // CH和NP开头的文件名不转小写
+        // localized name and asset name
+        // Do not lowercase filenames that start with CH or NP
         students_datamap.push([
             stu.zhName.replace(/ /g,"").toLowerCase(),
             stu.sprName.replace(/ /g,"")
         ])
     }else{
-        // 其他文件名全转小写
+        // Lowercase other filenames
         students_datamap.push([
             stu.zhName.replace(/ /g,"").toLowerCase(),
             stu.sprName.replace(/ /g,"").toLowerCase()
@@ -25,13 +25,13 @@ for(let stu of studentsjson.students){
 
 }
 
-// 封装人物名字和素材的键值对对应表，文件名改小写
+// Build a lowercased asset filename to character name map
 const student_datadict={}
 for(let stu of studentsjson.students){
     student_datadict[stu.sprName.toLowerCase()]=stu.zhName
 }
 /**
- * 给定spr文件名，不含后缀。返回中文名
+ * Given a spr filename without extension, return the character name
  */
 export function getcnnameof(filename){
     const lowfilename=filename.toLowerCase()
@@ -41,5 +41,5 @@ export function getcnnameof(filename){
     return ""
 }
 
-// 音效
+// Sound
 export const sounds_datamap=soundsjson.sounds

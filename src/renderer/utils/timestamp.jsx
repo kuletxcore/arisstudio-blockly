@@ -1,5 +1,5 @@
-// 根据时间生成yyyymmddhhmmss，用来下载图片命名
-// 最多2000个不同的数
+// Follow the timegenerateyyyymmddhhmmss，used for downloaded image names
+// At most 2000 distinct numbers
 function bigfunc(){
   if(!window.numinbigfunc){
     window.numinbigfunc=0

@@ -1,17 +1,17 @@
 import * as Blockly from 'blockly/core';
 import { javascriptGenerator } from 'blockly/javascript';
 
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 let blockname="b_user_write"
-// 带有映射的学生名
+// Student name with mapping
 const jsondesc = {
     "type": `${blockname}`,
-    "message0": "脚本 %1",
+    "message0": "Script %1",
     "args0": [
       {
         "type": "field_multilinetext",
         "name": "val1",
-        "text":"//可以是多行\n//文字脚本",
+        "text":"//can be multiple lines\n//text script",
         "spellcheck": false
       },
     ],
@@ -19,22 +19,22 @@ const jsondesc = {
     "previousStatement": null,
     "nextStatement": null,
     "colour": 230,
-    "tooltip": "这里你可以填多行文字脚本",
+    "tooltip": "You can enter a multi-line text script here",
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks[blockname] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator[blockname] = function (block) {
     const value_val1 = block.getFieldValue('val1')
     if(value_val1.length==0){
-      // 如果该字符串参数空内没有任何变量，忽略掉本代码块
+      // If this string input contains no Variabless, ignore this code block
       return ``
     }
 

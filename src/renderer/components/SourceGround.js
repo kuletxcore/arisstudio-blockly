@@ -16,44 +16,44 @@ const {Search} = Input
 const itemstyle={height:document.body.clientHeight*0.75+"px",overflow:'auto'}
 
 /**
- * 给定五文件类型，构建tab列表
+ * Implementation note.
  * bgm,bcg,cover,sound,spr
  */
 const buildItems=(itemlistmap)=>{
   return [
     {
       key: 'bgm',
-      label: `背景音乐`,
+      label: `BGM`,
       children: <BgmTab style={itemstyle} bgmlist={itemlistmap.bgm} />,
     },
     {
       key: 'bcg',
-      label: `背景图`,
+      label: `Background`,
       children: <BcgTab style={itemstyle} bcglist={itemlistmap.bcg} />,
     },
     {
       key: 'cover',
-      label: `覆盖图`,
+      label: `Cover`,
       children: <CoverTab style={itemstyle} coverlist={itemlistmap.cover}/>,
     },
     {
       key: 'sound',
-      label: `音效`,
+      label: `Sound`,
       children: <SoundTab style={itemstyle} soundlist={itemlistmap.sound}/>,
     },
     {
       key: 'sedesc',
-      label: `音效速查`,
+      label: `Sound Effects`,
       children: <SETab style={itemstyle} soundlist={itemlistmap.sound} />,
     },
     {
       key: 'spr',
-      label: `人物`,
+      label: `Character`,
       children: <SprTab style={itemstyle} sprlist={itemlistmap.spr}/>,
     },
     {
       key: 'help',
-      label: `帮助`,
+      label: `Help`,
       children: <HelpTab style={itemstyle} />,
     },
   ]
@@ -93,10 +93,10 @@ function SourceGround(props) {
 
     const searchword=word.toLowerCase()
     // console.log(searchword)
-    let postlist=[[],[],[],[],[]]// 搜索结果
+    let postlist=[[],[],[],[],[]]// Search Results
     const prelist=[props.sourcemap.get('bgm'),props.sourcemap.get('bcg'),props.sourcemap.get('cover'),props.sourcemap.get('sound'),props.sourcemap.get('spr')]
     if(word.length!==0){
-      // 搜索
+      // Search
       for(let listind in prelist){
         const list=prelist[listind]
         for(let eachfile of list){
@@ -122,8 +122,8 @@ function SourceGround(props) {
 
   return (
     <div id="sourceground">
-      <Search placeholder="搜索关键字(不区分大小写)" allowClear onSearch={onSearch} style={{ width: 300 }} />
-      <Button className="loadprojectbutton"><input type="file" multiple="" webkitdirectory="" name="file" accept='*' className="projectfile" onChange={loadData}></input>选择Data文件夹</Button>
+      <Search placeholder="Search keyword (case-insensitive)" allowClear onSearch={onSearch} style={{ width: 300 }} />
+      <Button className="loadprojectbutton"><input type="file" multiple="" webkitdirectory="" name="file" accept='*' className="projectfile" onChange={loadData}></input>Select Data Folder</Button>
       <Tabs defaultActiveKey='bgm' animated={false} 
       destroyInactiveTabPane={false}
       items={items} onChange={()=>{Howler.stop()}}/>

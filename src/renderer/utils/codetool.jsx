@@ -12,16 +12,16 @@ try {
 
         const case_jump_dict=new Map();
 
-        // 所有阶段代码开始
+        // All stage code starts
         ${code}
-        // 所有阶段代码结束
+        // All stage code ends
         let rescode=""
         if(errorset.size!=0){
 
-            rescode="以下主线块或定义支线块的id重复: "+Array.from(errorset.values()).join(",");
+            rescode="The following mainline or branch block IDs are duplicated: "+Array.from(errorset.values()).join(",");
             return rescode;
         }else{
-            // 排序
+            // Sort
             const sortMap = new Map([...resmap].sort((a, b) => a[0] - b[0]));
             rescode="";
             for(let thiskey of sortMap.keys()){
@@ -29,10 +29,10 @@ try {
                     met200=true;
                     rescode+="jump wholeProjectTail\\n"
                 }
-                if(thiskey>200){//key就是id
-                    // 支线块副本
+                if(thiskey>200){//keyisid
+                    // branch block copy
                     let thisvaluecode=sortMap.get(thiskey);
-                    // 如果有 跳转到该支线块 的跳转块
+                    // If there are jump blocks that jump to this branch block
                     if(case_jump_dict.has(thiskey)){
                         for(let timestamp of case_jump_dict.get(thiskey)){
                             rescode+="target "+thiskey+timestamp+"PathStart\\n"
@@ -42,30 +42,30 @@ try {
                     }
 
                 }else{
-                    // 主线块
+                    // Mainline Block
                     let thisvaluecode=sortMap.get(thiskey);
                     rescode+=thisvaluecode;
                 }
 
             }
-            if(met200){//如果有支线
+            if(met200){//If there is a branch
                 rescode+="target wholeProjectTail\\n"
             }
-            // 调试用
+            // For debugging
             window.errorset=errorset;
             window.resmap=resmap;
             window.case_jump_dict=case_jump_dict;
-            // 去除换行后多余空格
+            // Remove extra spaces after newlines
             rescode=rescode.replace(/ *\\n */g,"\\n");
             return rescode;
         }
         
         return rescode;
         }
-        // React里提取txtcode
+        // Extract txtcode in React
         txtcode=makecodetxt()
 } catch (error) {
-    txtcode="生成脚本时出错啦！你可以反馈该问题："+error.message
+    txtcode="An error occurred while generating the script. You can report this issue："+error.message
 }
 
 `

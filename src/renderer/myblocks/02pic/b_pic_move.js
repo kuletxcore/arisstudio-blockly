@@ -3,12 +3,12 @@ import { javascriptGenerator } from 'blockly/javascript';
 import myImager from 'renderer/models/imgcmd';
 import { wrapStr } from 'renderer/utils/DataTool';
 
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 let blockname="b_pic_move"
-// 带有映射的学生名
+// Student name with mapping
 const jsondesc = {
     "type": `${blockname}`,
-    "message0": "图片昵称 %1 移动至 %2 的 %3, 耗时 %4 秒",
+    "message0": "Image nickname %1 move to %2 %3, duration %4 seconds",
     "args0": [
       {
         "type": "input_value",
@@ -19,9 +19,9 @@ const jsondesc = {
         "type": "field_dropdown",
         "name": "drop1",
         "options": [
-            ["x轴","xm"],
-            ["y轴","ym"],
-            ["z轴","zm"]
+            ["x-axis","xm"],
+            ["y-axis","ym"],
+            ["z-axis","zm"]
         ]
       },
       {
@@ -49,14 +49,14 @@ const jsondesc = {
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks[blockname] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator[blockname] = function (block) {
     const nickname = javascriptGenerator.valueToCode(block, 'val1', javascriptGenerator.ORDER_ATOMIC);
     const axis = block.getFieldValue('drop1');
@@ -64,7 +64,7 @@ javascriptGenerator[blockname] = function (block) {
     const spendtime = block.getFieldValue('num2');
 
     if(axis==="zm"){
-      // z轴移动没有时间参数
+      // z-axismovement has no time parameter
       return `stagelist.push(\`${myImager.setaxis(wrapStr(nickname),"z",distance)}\`);`
     }
 

@@ -2,12 +2,12 @@ import * as Blockly from 'blockly/core';
 import { javascriptGenerator } from 'blockly/javascript';
 import myLoader from 'renderer/models/loadcmd'
 import { wrapStr } from 'renderer/utils/DataTool';
-// 定义JSON格式自定义模块
+// Define a custom module in JSON format
 let blockname="b_load_student"
-// 带有映射的学生名
+// Student name with mapping
 const jsondesc = {
     "type": `${blockname}`,
-    "message0": "加载人物 昵称 %1 spr名 %2 %3",
+    "message0": "Load character nickname %1 spr name %2 %3",
     "args0": [
       {
         "type": "input_value",
@@ -23,8 +23,8 @@ const jsondesc = {
         "type": "field_dropdown",
         "name": "drop1",
         "options": [
-            ["普通状态","spr"],
-            ["通讯状态","sprc"],
+            ["Normal state","spr"],
+            ["Communication state","sprc"],
         ]
       },
     ],
@@ -32,18 +32,18 @@ const jsondesc = {
     "previousStatement": null,
     "nextStatement": null,
     "colour": 230,
-    "tooltip": "spine 角色素材需要放在 /data/character/spr 文件夹中",
+    "tooltip": "Spine character assets must be placed in the /data/character/spr folder",
     "helpUrl": ""
   }
 
-// 注入自定义模块
+// Inject the custom module
 Blockly.Blocks[blockname] = {
     init: function () {
         this.jsonInit(jsondesc);
     }
 }
 
-// 为自定义块添加js语言生成器
+// Add a JavaScript generator for the custom block
 javascriptGenerator[blockname] = function (block) {
     const nickname = javascriptGenerator.valueToCode(block, 'val1', javascriptGenerator.ORDER_ATOMIC);
     const sprname = javascriptGenerator.valueToCode(block, 'val2', javascriptGenerator.ORDER_ATOMIC);

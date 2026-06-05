@@ -17,7 +17,7 @@ export function convertDataURIToBinary(dataURI) {
 
 
 /**
- * 从已上传的文件中根据文件名找到所需要的那个文件
+ * Implementation note.
  */
 export const findneededFile=(list,fname)=>{
     try {
@@ -36,7 +36,7 @@ export const findneededFile=(list,fname)=>{
 }
 
 /**
- * 从blockly字符串块传来的字符串套一个\`${}\`
+ * Implementation note.
  */
 export const wrapStr=(str)=>{
     return `\${${str}}`

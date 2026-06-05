@@ -1,5 +1,5 @@
 /**
- * 保存到localStorage，data为Object
+ * Implementation note.
  */
 export function saveToLocalStorage(keyname,data){
     const workspaceString=JSON.stringify(data)
@@ -7,34 +7,34 @@ export function saveToLocalStorage(keyname,data){
 }
 
 /**
- * 带后缀名称
+ * Implementation note.
  */
 export function saveTxt(name,txt,recall=()=>{}){
-    // 要保存的字符串
+    // Implementation note.
     const stringData = txt
-    // dada 表示要转换的字符串数据，type 表示要转换的数据格式
+    // Implementation note.
     const blob = new Blob([stringData], {
         type: "text/plain;charset=utf-8"
     })
-    // 根据 blob生成 url链接
+    // Implementation note.
     const objectURL = URL.createObjectURL(blob)
 
-    // 创建一个 a 标签Tag
+    // Implementation note.
     const aTag = document.createElement('a')
-    // 设置文件的下载地址
+    // Implementation note.
     aTag.href = objectURL
-    // 设置保存后的文件名称
+    // Implementation note.
     aTag.download = name
-    // 给 a 标签触发点击事件
+    // Implementation note.
     aTag.click()
-    // 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
-    // 当你结束使用某个 URL 对象之后，应该通过调用这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。
+    // Implementation note.
+    // Implementation note.
     URL.revokeObjectURL(objectURL)
     recall()
 }
 
 /**
- * 获取用户上传txt
+ * Implementation note.
  */
 export function uploadTxt(file,resolve){
     const reader = new FileReader();

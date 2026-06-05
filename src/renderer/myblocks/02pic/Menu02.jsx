@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function Menu02() {
   return (
-    <Category name="图片">
+    <Category name="Image">
       <Block type="b_pic_display">
         <Value name="val1"><Shadow type="text" /></Value>
       </Block>

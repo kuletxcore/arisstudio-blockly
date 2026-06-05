@@ -2,7 +2,7 @@ import PlayGround, { Block, Value, Field, Shadow, Category } from '../../compone
 
 export default function Menu05() {
   return (
-    <Category name="场景">
+    <Category name="Scene">
       <Block type="b_screen_effect">
       </Block>
     </Category>

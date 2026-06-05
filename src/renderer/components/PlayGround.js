@@ -7,33 +7,33 @@ import {
     BlockOutlined,
     SettingFilled
   } from '@ant-design/icons';
-// 引入Blockly基本对象
+// Implementation note.
 import Blockly from 'blockly/core';
 import {javascriptGenerator} from 'blockly/javascript';
 import 'blockly/blocks';
 import DarkTheme from '@blockly/theme-dark'
 import NormalTheme from '@blockly/theme-modern';
-// 引入字符串处理
+// Implementation note.
 import {generatefinalCodes} from '../utils/codetool'
 import {saveTxt,uploadTxt} from '../utils/IOdata';
 import { gethash } from 'renderer/utils/hashtool';
 import version from "../config/version"
-// 设置内嵌模块语言
+// Implementation note.
 import locale from 'blockly/msg/zh-hans';
 import SourceGround from './SourceGround';
 import {Howler} from 'howler'
-// 全局变量
+// Implementation note.
 import { GlobalContext } from 'renderer/config/globalContext';
-// 设置脚本解析
+// Implementation note.
 import SettingPage from './SettingPage';
-// 积木背包
+// Implementation note.
 import {Backpack} from '@blockly/workspace-backpack';
 
 Blockly.setLocale(locale);
 
 const defaultproject={"blocks":{"languageVersion":0,"blocks":[{"type":"b_stage","id":"DFv.H4^h)CD_*%9b?0[m","x":-5,"y":0,"fields":{"num1":1},"inputs":{"sta1":{"block":{"type":"b_load","id":"OwHIduLJQ10}zSNKgrhm","inputs":{"sta1":{"block":{"type":"b_student","id":"iK{ow+5JIf7z:.{A{U5w","fields":{"drop1":"aru_spr","drop2":"spr"},"inputs":{"val1":{"shadow":{"type":"text","id":"A$u+MGYu(pEcK@oGm|Cq","fields":{"TEXT":"aru"}}}}}}}}}}},{"type":"b_stage","id":"U4Kj.z[L[=qeDjKt?XLV","x":-6,"y":130,"fields":{"num1":2},"inputs":{"sta1":{"block":{"type":"b_stu_display","id":"phh;xnagEBu|FhV^.jl1","fields":{"drop1":"show"},"inputs":{"val1":{"shadow":{"type":"text","id":".cI?)UjB^5kS]lb!I7Mu","fields":{"TEXT":"aru"}}}}}}}}]}}
 
-// 直接改成保存文件
+// Implementation note.
 // calling IPC exposed from preload script
 if(window.electron&&window.electron.ipcRenderer){
     window.isinWebpageMode=false
@@ -48,7 +48,7 @@ if(window.electron&&window.electron.ipcRenderer){
 }
 
 
-// 防抖
+// Implementation note.
 function antiShake(fun, delay) {
     window.genrun = null;
     return function (e) {
@@ -62,7 +62,7 @@ function antiShake(fun, delay) {
 
 
 function PlayGround(props){
-    // TODO: 生成脚本改为 Promise
+    // Implementation note.
     const blocklyDiv = useRef();
     const toolbox = useRef();
     let primaryWorkspace = useRef();
@@ -71,22 +71,22 @@ function PlayGround(props){
         setDarktheme}=useContext(GlobalContext)
     // console.log(language)
     
-    // 实时导出的文件路径使用window.wfilepath
+    // Implementation note.
 
-    // 是否自动转脚本
+    // Implementation note.
     let [autoturn,setAutoturn]=useState(true)
-    // 上次项目文件序列化
+    // Implementation note.
     let [projectobj,setProjectobj]=useLocalStorage("saveproject",defaultproject)
-    // backpack序列化
+    // Implementation note.
     let backpack
     let [backpackobj,setBackpackobj]=useLocalStorage("backpack",{})
-    // 是否显示右侧工具框
+    // Implementation note.
     let [showtool,setShowtool]=useLocalStorage("showtool",true)
-    // 生成的代码框，esultcode当前脚本
+    // Implementation note.
     let [resultcode,setResultcode]=useState("")
-    // 是否显示资源页
+    // Implementation note.
     let [sourcepageopen,setSourcepageopen]=useState(false)
-    // Data资源
+    // Implementation note.
     let [sourcemap,setSourcemap]=useState(new Map([
         ["bgm",[]],
         ["bcg",[]],
@@ -94,11 +94,11 @@ function PlayGround(props){
         ["sound",[]],
         ["spr",[]],
     ]))
-    // 设置页面是否打开
+    // Implementation note.
     let [settingopen,setSettingopen]=useState(false)
 
 
-    // 点击一个积木
+    // Implementation note.
     const onClickBlock=(event)=>{
         window.lastClick=""
         if(event.type==="click"&&event.blockId){
@@ -109,7 +109,7 @@ function PlayGround(props){
     }
 
     useEffect(()=>{
-        // 等一秒挂载了ref后，再从localStorage读取上次的项目内容
+        // Implementation note.
         setTimeout(()=>{
             if(projectobj){
                 try {
@@ -129,7 +129,7 @@ function PlayGround(props){
 
     },[])
 
-    // Playground设定变更时重绘
+    // Implementation note.
     useEffect(() => {
         const { initialXml, children, ...rest } = props;
         if(darktheme){
@@ -154,27 +154,27 @@ function PlayGround(props){
             );
         }
         backpack = new Backpack(primaryWorkspace.current);
-        Blockly.Msg['EMPTY_BACKPACK'] = '清空背包';
-        Blockly.Msg['REMOVE_FROM_BACKPACK'] = '从背包移除';
-        Blockly.Msg['COPY_TO_BACKPACK'] = '添加至背包';
-        Blockly.Msg['COPY_ALL_TO_BACKPACK'] = '全部添加至背包';
-        Blockly.Msg['PASTE_ALL_FROM_BACKPACK'] = '从背包粘贴全部';
+        Blockly.Msg['EMPTY_BACKPACK'] = 'Clear Backpack';
+        Blockly.Msg['REMOVE_FROM_BACKPACK'] = 'Remove from Backpack';
+        Blockly.Msg['COPY_TO_BACKPACK'] = 'Add to Backpack';
+        Blockly.Msg['COPY_ALL_TO_BACKPACK'] = 'Add All to Backpack';
+        Blockly.Msg['PASTE_ALL_FROM_BACKPACK'] = 'Paste All from Backpack';
         backpack.init()
         
 
         if (initialXml) {
             Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(initialXml), primaryWorkspace.current);
         }
-        // 实时生成
+        // Implementation note.
         primaryWorkspace.current.addChangeListener(antiShake(antiSaveFile,750));
         primaryWorkspace.current.addChangeListener(onClickBlock)
 
     }, [primaryWorkspace, toolbox, blocklyDiv]);
-    // 导入项目
+    // Implementation note.
     const loadProject=(e)=>{
         if(e.target && e.target.files){
             const file=e.target.files[0];
-            // 检查文件名后缀
+            // Implementation note.
             const filenamesegs=file.name.split(".")
             if(filenamesegs[filenamesegs.length-1]==="bablockly"){
                 uploadTxt(file,function(str){
@@ -182,24 +182,24 @@ function PlayGround(props){
                     try{
                         Blockly.serialization.workspaces.load(workspaceObj, primaryWorkspace.current);
                     }catch(error){
-                        setResultcode("读取错误，请检查项目文件的版本以及blockly程序版本，不同版本间可能会不兼容")
+                        setResultcode("Read error. Check the project file version and Blockly app version; different versions may be incompatible.")
                     }
                 })
             }else{
-                setResultcode("读取失败，项目文件名后缀应当是bablockly")
+                setResultcode("Read failed. The project file extension should be bablockly.")
             }
         }
         
     }
-    // 导出项目
+    // Implementation note.
     const saveProject=()=>{
-        saveTxt(`ArisStudio_blockly可视化_${version}.bablockly`,JSON.stringify(Blockly.serialization.workspaces.save(primaryWorkspace.current)),()=>{
+        saveTxt(`ArisStudio_blocklyvisual_${version}.bablockly`,JSON.stringify(Blockly.serialization.workspaces.save(primaryWorkspace.current)),()=>{
             message.destroy()
-            message.success("项目保存",3)
+            message.success("Project saved",3)
         })
     }
     /**
-     * 加载Data文件夹
+     * LoadDatafolder
      */
     const loadData=(eve)=>{
         // console.log(eve)
@@ -231,18 +231,18 @@ function PlayGround(props){
                 mynewsourcemap.set("cover",mycoverlist)
                 mynewsourcemap.set("sound",mysoundlist)
                 mynewsourcemap.set("spr",mysprlist)
-                message.success("素材共"+(mybgmlist.length+mybcglist.length+mycoverlist.length+mysoundlist.length+mysprlist.length)+"个",3)
+                message.success("Total assets: "+(mybgmlist.length+mybcglist.length+mycoverlist.length+mysoundlist.length+mysprlist.length)+"",3)
 
                 // setSourcepageopen(true)
                 resolve(mynewsourcemap)
                 
             } catch (error) {
-                reject("失败，请确保选择的是Data文件夹")
+                reject("Failed. Make sure the selected folder is the Data folder.")
             }
         }).then((res)=>{setSourcemap(res)})
     }
     /**
-     * 打开资源浏览页
+     * Implementation note.
      */
     const openSourcePage=()=>{
         let srctotal=0
@@ -251,7 +251,7 @@ function PlayGround(props){
         }
         if(srctotal===0){
             message.destroy()
-            message.error("请选择Data文件夹")
+            message.error("Please select the Data folder.")
             setSourcepageopen(true)
         }else{
             setSourcepageopen(true)
@@ -260,50 +260,50 @@ function PlayGround(props){
     }
 
     /**
-     * 生成脚本代码，并放入屏幕右侧文本框
+     * Implementation note.
      *  */ 
     const generateCode = () => {
-        // console.log("生成脚本")
-        // 将现在的playground内容存入localStorage
+        // console.log("generateScript")
+        // Implementation note.
         setProjectobj(Blockly.serialization.workspaces.save(primaryWorkspace.current))
-        // 将现在的backpack内容存入LocalStorage
+        // Implementation note.
         if(backpack){
             setBackpackobj(backpack.getContents())
         }
         
-        // 生成代码前时间戳归0
-        // 每次playground更新，设置window里numinbigfunc值为0，这样让utils/timestamp每次更新后都是从0开始计数，遇到一个if就自己加1，也不会不限加
-        // 但是if块的上下变了，if生成的id还是会变，无伤大雅嗷
+        // Implementation note.
+        // Implementation note.
+        // Implementation note.
         window.numinbigfunc=0;
-        // playground生成代码
+        // playgroundgeneratecode
         let areacode = javascriptGenerator.workspaceToCode(
           primaryWorkspace.current
         );
-        // 组合代码
+        // Implementation note.
         const playcode=generatefinalCodes(areacode)
         window.playcode=playcode
-        // 运行生成的代码
-        // 这会给window注册一个makecodetxt函数并运行，然后最终js脚本会存在window.txtcode,经过处理后工坊脚本在window.rescode
+        // Implementation note.
+        // Implementation note.
         try {
             window.eval(playcode)
             setResultcode(window.txtcode)
             // console.log(identires)
         } catch (error) {
-            setResultcode(`生成脚本时出错啦，你可以反馈该问题：${error.message}`)
+            setResultcode(`An error occurred while generating the script. You can report this issue：${error.message}`)
         }
     }
-    // 从已有文件保存一个文件位置
+    // Implementation note.
     const selectFilepath=(e)=>{
         if(e.target&&e.target.files){
-            window.wfilepath=e.target.files[0].path // 为了实际保存
-            message.success("开启实时导出到:"+window.wfilepath,6)
+            window.wfilepath=e.target.files[0].path // Save the actual path.
+            message.success("Enabled live export to:"+window.wfilepath,6)
             antiSaveFile({type:"manualdoit"})
         }else{
-            message.error("无法得到文件路径",3)
+            message.error("Unable to get file path",3)
         }
     }
 
-    // 当playground更新时 如果用户设置了下载位置，（electron）自动下载
+    // Implementation note.
     const antiSaveFile=(event)=>{
         const genandsave=()=>{
             return new Promise((resolve,reject)=>{
@@ -321,31 +321,31 @@ function PlayGround(props){
         }
     }
 
-    // web打开文件管理器 让用户下载脚本
+    // Implementation note.
     const downloadCode=()=>{
         saveTxt(`demob.txt`,resultcode,()=>{
             message.destroy()
-            message.success("脚本保存",3)
+            message.success("Script saved",3)
         })
 
     }
 
     /**
-     * 正则获得文中每个nick对应的map（stuspeakMap），hash：{name:名字，content:话内容，lines:哪些行},loadend：加载结束所在的行
+     * Implementation note.
      */
     const getChatinfo=(resscript)=>{
-        // 匹配说话人姓名
+        // Implementation note.
         let resscriptlist=resscript.split("\n")
         const stuspeakMap=new Map()
         const errorstuspeakSet=new Set()
         let hasloadend=false
         for(let senidx in resscriptlist){
-            // 每一行
+            // Implementation note.
             let linewords=resscriptlist[senidx].trim()
             if(linewords==="load end"){
                 stuspeakMap.set("hasloadend",senidx)
             }
-            // 正则
+            // Implementation note.
             // t tc
             const singlechar=`[\\u3000-\\u303f\\u4e00-\\u9fa5_a-zA-Z0-9.-~#（）|【-】· (){}+=*^&%$@!.,，。<>;:：；‘’“”、'"?\`\\d\\w\\s\\u3002\\uff1f\\uff01\\uff0c\\u3001\\uff1b\\uff1a\\u201c\\u201d\\u2018\\u2019\\uff08\\uff09\\u300a\\u300b\\u3008\\u3009\\u3010\\u3011|\\u300e\\u300f\\u300c\\u300d\\ufe43\\ufe44\\u3014\\u3015\\u2026\\u2014\\uff5e\\ufe4f\\uffe5]`
             const matchtc=linewords.match(eval(`/tc? '(${singlechar}*)' '${singlechar}*' '(${singlechar}*)'/`))
@@ -362,9 +362,9 @@ function PlayGround(props){
                 let eleval=matchres[1]+matchres[2]
                 let elekey='00'+gethash(eleval)
                 if(stuspeakMap.has(elekey)){
-                    // 可能会有冲突
+                    // Implementation note.
                     errorstuspeakSet.add(matchres[2])
-                    // 脚本靠前的放列表前面
+                    // Implementation note.
                     stuspeakMap.get(elekey)['lines'].push(senidx)
                 }else{
                     stuspeakMap.set(elekey,{'name':matchres[1],'content':matchres[2],'lines':[senidx]})
@@ -378,7 +378,7 @@ function PlayGround(props){
 
     }
     /**
-     * 导出对话文本
+     * Implementation note.
      */
      const getChattxt=()=>{
         const chatinfomapt=getChatinfo(resultcode)
@@ -391,10 +391,10 @@ function PlayGround(props){
             outtxt+=`${ele[0]}.wav\n`
             outtxt+=`${ele[1].content}\n`
         }
-        saveTxt("对话文本.txt",outtxt)
+        saveTxt("Dialogue text.txt",outtxt)
     }
     /**
-     * 将stuspeakMap里面的lines展平成列表，从脚本上到下顺序放{hash,name:名字，content:话内容，line:哪行}
+     * Implementation note.
      */
      const flatmap=(amap)=>{
         const reslist=[]
@@ -419,28 +419,28 @@ function PlayGround(props){
         return reslist
     }
     /**
-     * （手动/）生成语音脚本
-     * 添加对话块的语音音效
+     * Implementation note.
+     * Implementation note.
      */
     const getChatscript=()=>{
         const txtcodelist=resultcode.split("\n")
         const chatinfomap=getChatinfo(resultcode)
         const flatlist=flatmap(chatinfomap)
         flatlist.reverse()
-        // 先加后面的语音音效使用
+        // Implementation note.
         for(let ele of flatlist){
             const lineind=ele.line
-            // 反着来
+            // Implementation note.
             txtcodelist.splice(lineind,0,`se play`)
             txtcodelist.splice(lineind,0,`se set ${ele.hash}`)
             txtcodelist.splice(lineind,0,`se set mutevoice`)
 
         }
-        // 然后加load end
+        // Implementation note.
         if(!chatinfomap.has("hasloadend")){
             txtcodelist.splice(0,0,"load end")
         }
-        // 再加开头的语音音效导入
+        // Implementation note.
         for(let ele of flatlist){
             const filename=`${ele.hash}.wav`
             txtcodelist.splice(0,0,`load se ${ele.hash} ${filename}`)
@@ -466,14 +466,14 @@ function PlayGround(props){
             return !darktheme
         })
         message.destroy()
-        message.success("切换界面样式",3)
+        message.success("Switched interface style",3)
     }
 
-    // 清空当前积木区
+    // Clear the current workspace
     const confirmclear=()=>{
         Blockly.serialization.workspaces.load({}, primaryWorkspace.current);
         message.destroy()
-        message.warning("积木区清空")
+        message.warning("Workspace cleared")
     }
 
     return (
@@ -488,21 +488,21 @@ function PlayGround(props){
                 </Col>
             </Row>
         </span>
-        {/* 积木区 */}
+        {/* Workspace */}
         <span ref={blocklyDiv} id="blocklyDiv" onKeyUp={e=>console.log(e.keyCode===83 && e.ctrlKey)} onClick={(e)=>{console.log(e)}}/>
         <div style={{ display: 'none' }} ref={toolbox}>
             {props.children}
         </div>
-        {/* 生成的代码 显示框 */}
+        {/* Generated code display box */}
         <textarea 
             value={resultcode}
             spellCheck={false}
             style={showtool?{}:{display:"none"}} 
             id="rescodebox" 
         />
-        {/* 资源页 */}
+        {/* Assets */}
         <div id="sourcemodal">
-            <Modal width={"80%"} style={{top:'25px'}} title="资源浏览" open={sourcepageopen}
+            <Modal width={"80%"} style={{top:'25px'}} title="Asset Browser" open={sourcepageopen}
             onOk={()=>{
             setSourcepageopen(false)
             Howler.stop()
@@ -514,10 +514,10 @@ function PlayGround(props){
                 <SourceGround loadData={loadData} sourcemap={sourcemap}/>
             </Modal>
         </div>
-        {/* 设置页面 */}
+        {/* Implementation note. */}
         <div style={{position:'absolute',bottom:10,right:2,color:'gray'}}>{version}</div>
         <div>
-            <Modal width={"80%"} style={{top:'25px'}} title="设置" open={settingopen}
+            <Modal width={"80%"} style={{top:'25px'}} title="Settings" open={settingopen}
             onOk={()=>{
             setSettingopen(false)
             }}
@@ -547,7 +547,7 @@ function PlayGround(props){
 
 export default PlayGround;
 
-// 基本类型
+// Basic types
 const Block = (p) => {
     const { children, ...props } = p;
     props.is = "blockly";

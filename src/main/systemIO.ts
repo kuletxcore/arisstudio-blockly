@@ -1,5 +1,5 @@
 /**
- * 文件操作工具类
+ * File operation utility class
  */
  import { writeFile } from 'fs';
 

@@ -13,7 +13,7 @@ var myTout
 
 const clearSprspace=()=>{
   /**
-   * 清除spr区域
+   * Clear the spr area
    */
   while(document.querySelector("#ba-player")){
     document.querySelector("#ba-player").remove()
@@ -24,35 +24,35 @@ const clearSprspace=()=>{
 }
 
 export default function SprTab(props) {
-  // 差分的分页
+  // Variant pagination
   const [page,setPage]=useState(1)
   const [chafenlistlen,setChafenlistlen]=useState(1)
-  // 部分人物的各自设置：置顶与否attop,
+  // Per-character settings, including whether to pin to top
   const [charsettings,setCharsettings]=useLocalStorage("charsettings",{})
 
-  const sprmap=new Map() //所有文件名（有后缀）对照file
-  const sprnameset=new Set() //所有文件名（无后缀）
+  const sprmap=new Map() //All filenames with extensions mapped to files
+  const sprnameset=new Set() //All filenames without extensions
   props.sprlist.forEach((each)=>{
     sprmap.set(each.name,each)
     sprnameset.add(each.name.split(".")[0])
   })
-  const [nowname,setNowname]=useState("暂无选择")
+  const [nowname,setNowname]=useState("No selection")
   const [nowind,setNowind]=useState(-1)
-  const [chafen,setChafen]=useState(false)//差分与否
-  // const [fixpos,setFixpos]=useState(false)//固定视角与否
+  const [chafen,setChafen]=useState(false)//Whether variants are enabled
+  // const [fixpos,setFixpos]=useState(false)//Whether the view is fixed
   const chafenRef=useRef(chafen)
   chafenRef.current=chafen
 
-  // 这一页的spr名
+  // spr names on this page
   const sprnamelist=[...sprnameset.values()]
   // console.log(sprnamelist)
 
-  // 置顶按钮的值
+  // Pin-to-top button value
   const [buttonontopcheck,setButtontopcheck]=useState(false)
 
-  // 差分视口是否智能
+  // Whether the variant viewport is smart
   const [smartwin,setSmartwin]=useState(true)
-  // 获取current当下对象值
+  // Read the current object value
   const smartRef=useRef(smartwin)
   smartRef.current=smartwin
 
@@ -64,23 +64,23 @@ export default function SprTab(props) {
 
     Promise.all([getBase64(sprmap.get(`${eachname}.skel`)),getText(sprmap.get(`${eachname}.atlas`)),getBase64(sprmap.get(`${eachname}.png`))]).then((reslist)=>{
 
-      // 命名
+      // Naming
       const skelname=`${eachname}.skel`
-      const atlasname=`${eachname}.atlas`//这是个字符串
+      const atlasname=`${eachname}.atlas`//This is a string
       const pngname=`${eachname}.png`
 
       // console.log("3 names:",skelname,atlasname,pngname)
-      // 文件内容
+      // File contents
       const rawobj={}
       rawobj[skelname]=reslist[0]
       rawobj[atlasname]=reslist[1]
       rawobj[pngname]=reslist[2]
 
       if(page!==-1){
-        // 如果只是翻页，跳过先渲染一次获取表情的这个过程
+        // When only changing pages, skip the first render that reads expressions
 
       }else{
-        // 卸载以前的
+        // Unmount previous content
         clearSprspace()
 
         setNowname(eachname)
@@ -100,12 +100,12 @@ export default function SprTab(props) {
       }
       
       clearTimeout(myTout)
-      // 如果开启差分
+      // If variants are enabled
       if(chafenRef.current){
 
         myTout=setTimeout(()=>{
-          // console.log("定时器Sprtab")
-          // 第一次渲染得到面部位置和animation列表
+          // console.log("SprTab timer")
+          // First render gets face position and animation list
           let xlist=hullpos.map((each)=>{return each[0]})
           let ylist=hullpos.map((each)=>{return each[1]})
           // console.log(hullpos)
@@ -123,7 +123,7 @@ export default function SprTab(props) {
             height: Math.max(...ylist)-Math.min(...ylist)+2*viewpad,
           }
           }else{
-            // 每个人物都固定视角
+            // Use a fixed view for every character
           baviewport={
             x:-140,
             y:786,
@@ -134,14 +134,14 @@ export default function SprTab(props) {
           
           
 
-          // console.log("视口",baviewport)
+          // console.log("viewport",baviewport)
           
           
           // 
 
           // 
           clearSprspace()
-          // 循环渲染面部
+          // Render faces in a loop
           let mypage=page
           if(mypage===-1){
             mypage=1
@@ -158,7 +158,7 @@ export default function SprTab(props) {
                   atlasUrl:atlasname,
                   rawDataURIs:rawobj,
                   animation:each.name,
-                  viewport: {...baviewport},// 定位到脸
+                  viewport: {...baviewport},// Position to face
                   premultipliedAlpha: false,
                   showControls: false,
                   backgroundColor: "#cccccc", // set the walk animation to play once
@@ -179,29 +179,29 @@ export default function SprTab(props) {
       <div style={{textAlign:'center',marginRight:'15px'}}
       onClick={()=>{
         message.destroy()
-        message.success("复制成功")
+        message.success("Copied")
         copy(nowname)
       }}>{nowname}</div>
 
       
-      置顶：<Switch checked={buttonontopcheck} onClick={(ck)=>{
+      Pin to top：<Switch checked={buttonontopcheck} onClick={(ck)=>{
         setButtontopcheck(ck)
         const newcharsettings={...charsettings}
         newcharsettings[nowname]=ck
-        if(!ck){//如果改为false，直接把键给删了
+        if(!ck){//If changed to false, delete the key directly
           delete newcharsettings[nowname]
         }
         setCharsettings(newcharsettings)
       }}></Switch>
 
-      面部差分：<Switch checked={chafen} onClick={(ck)=>{
+      Face variants：<Switch checked={chafen} onClick={(ck)=>{
         setChafen((ck)=>{
           renderspr(nowname,"basprbox",nowind)
           return !ck
         })
         }}></Switch>
 
-      <span style={chafen?{}:{visibility:'hidden'}}>{smartwin?"差分识别脸部":"差分固定位置"}<Switch checked={smartwin} onClick={(ck)=>{
+      <span style={chafen?{}:{visibility:'hidden'}}>{smartwin?"Variant face detection":"Variant fixed position"}<Switch checked={smartwin} onClick={(ck)=>{
         setSmartwin(ck)
         renderspr(nowname,"basprbox",nowind)
       }}></Switch></span>
@@ -214,11 +214,11 @@ export default function SprTab(props) {
     </Row>
     <Row>
       
-      {/* 左侧列表 */}
+      {/* Left list */}
       <Col span={6} style={props.style}>
         {Object.keys(charsettings).map((name,ind)=>{
           if(sprnamelist.includes(name)){
-            return <div className="stuname" style={{backgroundColor:ind+5000===nowind?'lightblue':""}} //ind+5000与后面错开
+            return <div className="stuname" style={{backgroundColor:ind+5000===nowind?'lightblue':""}} //ind+5000Offset from the following indexes
             onClick={()=>{
               renderspr(name,"basprbox",ind+5000,-1)
             }}>{name+getcnnameof(name)}</div>
@@ -231,7 +231,7 @@ export default function SprTab(props) {
           renderspr(name,"basprbox",ind,-1)
         }}>{name+getcnnameof(name)}</div>})}
       </Col>
-      {/* 右侧预览 */}
+      {/* Right preview */}
       <Col span={18} style={{position:'relative'}}>
           <span id="basprbox" style={{position:'absolute',display:'inline-block',width:'100%',height:'100%'}}></span>
           {[0,0,0,0,0,0,0,0,0].map((each,ind)=>{
@@ -239,7 +239,7 @@ export default function SprTab(props) {
               style={{display:chafen?'inline-block':'none',width:'200px',height:"220px"}}
             onClick={(e)=>{
               message.destroy()
-              message.success("复制成功")
+              message.success("Copied")
               copy(e.target.parentNode.parentNode.parentNode.innerText)
               }}>
               <span id={"namechafen"+ind} style={{display:chafen?'inline-block':'none',width:'200px',height:'20px',zIndex:999}}></span>

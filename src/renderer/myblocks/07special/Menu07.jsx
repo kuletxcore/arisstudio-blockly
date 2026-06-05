@@ -2,7 +2,7 @@ import PlayGround, { Block, Value, Field, Shadow, Category } from '../../compone
 
 export default function Menu07() {
   return (
-    <Category name="特殊">
+    <Category name="Special">
       <Block type="b_special_autotime">
       </Block>
       <Block type="b_special_breakpoint">

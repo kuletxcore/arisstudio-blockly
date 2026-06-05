@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const PREFIX = 'local-'
 
 /**
- * 使用localstorage
+ * Uselocalstorage
  */
 export function useLocalStorage(key, initialValue) {
   const prefixedKey = PREFIX +  key

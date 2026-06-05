@@ -1,113 +1,113 @@
 class myImage{
     /**
-     * 渐入
-     * @param nameId 素材昵称
+     * Fade In
+     * @param nameId asset nickname
      */
     show=(nameId)=>{
         return `${nameId} show`
     }
 
     /**
-     * 渐出
-     * @param nameId 素材昵称
+     * Fade Out
+     * @param nameId asset nickname
      */
     hide=(nameId)=>{
         return `${nameId} show`
     }
 
     /**
-     * 直接出现
-     * @param nameId 素材昵称
+     * appear immediately
+     * @param nameId asset nickname
      */
     appear=(nameId)=>{
         return `${nameId} appear`
     }
 
     /**
-     * 直接消失
-     * @param nameId 素材昵称
+     * disappear immediately
+     * @param nameId asset nickname
      */
     disappear=(nameId)=>{
         return `${nameId} disappear`
     }
 
     /**
-     * @param action show渐入/hide渐出/appear直接出现/disappear直接消失
+     * @param action showFade In/hideFade Out/appearappear immediately/disappeardisappear immediately
      */
     display=(nameId, action)=>{
         return `${nameId} ${action}`
     }
 
     /**
-     * 透明度变化
-     * @param nameId 素材昵称
-     * @param alpha 0~1 透明度
-     * @param time 渐变时间
+     * opacitychange
+     * @param nameId asset nickname
+     * @param alpha 0~1 opacity
+     * @param time fade duration
      */
     fade=(nameId, alpha:number, time:number=0)=>{
         return `${nameId} fade ${alpha} ${time}`
     }
 
     /**
-     * 单独设置x/y/z坐标
-     * @param nameId 素材昵称
+     * Set individual x/y/z coordinates
+     * @param nameId asset nickname
      * @param axis x/y/z
-     * @param value 值
+     * @param value value
      */
     setaxis=(nameId, axis, value:number)=>{
         return `${nameId} ${axis} ${value}`
     }
 
     /**
-     * 设置x，y坐标
-     * @param nameId 素材昵称
-     * @param x 坐标
-     * @param y 坐标
+     * Set x/y coordinates
+     * @param nameId asset nickname
+     * @param x coordinate
+     * @param y coordinate
      */
     position=(nameId, x:number, y:number)=>{
         return `${nameId} ${x} ${y}`
     }
 
     /**
-     * 单独沿着x/y移动
-     * @param nameId 素材昵称
+     * Move along x or y only
+     * @param nameId asset nickname
      * @param axis xm/ym
-     * @param value 值
-     * @param time 时间
+     * @param value value
+     * @param time time
      */
     moveaxis=(nameId, axis, value:number, time:number=0.5)=>{
         return `${nameId} ${axis} ${value} ${time}`
     }
 
     /**
-     * x，y平面移动
-     * @param nameId 素材昵称
-     * @param x 值
-     * @param y 值
-     * @param time 时间
+     * Move on the x/y plane
+     * @param nameId asset nickname
+     * @param x value
+     * @param y value
+     * @param time time
      */
     moveposition=(nameId, x:number, y:number, time:number=0.5)=>{
         return `${nameId} pm ${x} ${y} ${time}`
     }
 
     /**
-     * x/y 轴抖动
-     * @param nameId 昵称
+     * x/y axisshake
+     * @param nameId nickname
      * @param axis xs/ys
-     * @param strength 抖动强度
-     * @param time 时间
-     * @param vibrato 抖动频率
+     * @param strength shakestrength
+     * @param time time
+     * @param vibrato shakefrequency
      */
     shakeaxis=(nameId, axis, strength:number, time:number=0.5, vibrato:number=6)=>{
         return `${nameId} ${axis} ${strength} ${time} ${vibrato}`
     }
 
     /**
-     * 随机抖动
-     * @param nameId 昵称
-     * @param strength 抖动强度
-     * @param time 时间
-     * @param vibrato 抖动频率
+     * Random shake
+     * @param nameId nickname
+     * @param strength shakestrength
+     * @param time time
+     * @param vibrato shakefrequency
      */
     shakerandom=(nameId, strength, time:number=0.5, vibrato:number=6)=>{
         return `${nameId} shake ${strength} ${time} ${vibrato}`
@@ -115,10 +115,10 @@ class myImage{
 
 
     /**
-     * 在 x 和 y 轴同时缩放
-     * @param nameId 昵称
-     * @param value 值
-     * @param time 时间
+     * Scale on x and y axes together
+     * @param nameId nickname
+     * @param value value
+     * @param time time
      */
     scale=(nameId, value:number, time:number=0)=>{
         return `${nameId} scale ${value} ${time}`

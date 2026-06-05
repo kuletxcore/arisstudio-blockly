@@ -1,8 +1,8 @@
 class Mysound{
 
     /**
-     * 播放/暂停
-     * @param nameId 声音名称
+     * Play/Pause
+     * @param nameId sound name
      * @param type "play"/"pause"/"stop"
      */
     play=(nameId:string,type:string)=>{
@@ -10,21 +10,21 @@ class Mysound{
     }
 
     /**
-     * 音量设置
+     * VolumeSettings
      */
     volume=(nameId:string,value:number)=>{
         return `${nameId} volume ${value}`
     }
 
     /**
-     * 音量渐变
+     * Volume fade
      */
     fade=(nameId:string,value:number,time:number)=>{
         return `${nameId} fade ${value} ${time}`
     }
 
     /**
-     * 循环/一次
+     * Loop/once
      * @param type "loop"/"once"
      */
     loop=(nameId:string,type:string)=>{
